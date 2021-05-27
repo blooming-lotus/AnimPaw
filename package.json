@@ -21,7 +21,7 @@
     "typescript"
   ],
   "author": "star191",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.57",
     "@electron-forge/maker-wix": "^6.0.0-beta.57",
