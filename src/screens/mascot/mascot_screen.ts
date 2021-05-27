@@ -6,7 +6,7 @@ import { event_fit_window } from "../../vars";
 export function createMascotScreen(): BrowserWindow {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    icon: path.join(__dirname, "../../icons/icon.png"),
+    icon: path.join(__dirname, "../../../icons/icon.png"),
     width: 0,
     height: 0,
     transparent: true,
@@ -19,8 +19,7 @@ export function createMascotScreen(): BrowserWindow {
       worldSafeExecuteJavaScript: true,
       contextIsolation: true,
       nodeIntegration: true,
-    },
-
+    }
   });
 
   // and load the index.html of the app.

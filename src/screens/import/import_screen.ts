@@ -6,7 +6,7 @@ import { event_fit_window } from "../../vars";
 export function createImportScreen(): BrowserWindow {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    icon: path.join(__dirname, "../../icons/icon.png"),
+    icon: path.join(__dirname, "../../../icons/icon.png"),
     width: 800,
     height: 600,
     transparent: false,
@@ -15,16 +15,15 @@ export function createImportScreen(): BrowserWindow {
     resizable: false,
     skipTaskbar: false,
     webPreferences: {
-      preload: path.join(__dirname, "../preload.js"),
+      preload: path.join(__dirname, "preload.js"),
       worldSafeExecuteJavaScript: true,
       contextIsolation: true,
       nodeIntegration: true,
-    },
-
+    }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "../../public/index.html"))
+  mainWindow.loadFile(path.join(__dirname, "../../../public/import_screen.html"))
     .then(_ => {
       console.log("index.html loaded");
     })
@@ -32,13 +31,9 @@ export function createImportScreen(): BrowserWindow {
       console.log(e);
     });
 
-  ipcMain.on(event_fit_window, (_, data) => {
-    console.log(`fit-window, data: ${data.w} ${data.h}`)
-    mainWindow.setSize(data.w, data.h)
-  })
-
+  
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   return mainWindow;
 }
