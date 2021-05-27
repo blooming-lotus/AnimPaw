@@ -2,7 +2,7 @@
 // It has the same sandbox as a Chrome extension.
 import { ipcRenderer } from "electron";
 import * as path from "path";
-import { asset_character_name, event_fit_window } from "./vars";
+import { asset_character_name, event_fit_window } from "../../vars";
 
 window.addEventListener("DOMContentLoaded", () => {
 
@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 function setCatImg(catEl: HTMLElement|null) {
-  catEl?.setAttribute('src', path.join(__dirname, `../assets/${asset_character_name}`))
+  catEl?.setAttribute('src', path.join(__dirname, `../../../assets/${asset_character_name}`))
 }
 
 

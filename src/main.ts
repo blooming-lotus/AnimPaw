@@ -1,5 +1,6 @@
-import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, NativeImage, Tray } from "electron";
 import * as path from "path";
+import { createMascotScreen } from "./screens/mascot/mascot_screen";
 import { event_fit_window } from "./vars";
 
 let tray: Tray|null = null;
@@ -8,9 +9,10 @@ let tray: Tray|null = null;
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() =>{
-  const window = createWindow();
+  const window = createMascotScreen();
+  preventLeaveOntop(window);
   createTray(window);
-  macOsRecreateWindow()
+  macOsRecreateWindow();
 })
 
 
@@ -24,53 +26,11 @@ app.on("window-all-closed", () => {
 });
 
 
-function createWindow(): BrowserWindow {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    icon: path.join(__dirname, "../icons/icon.png"),
-    width: 0,
-    height: 0,
-    transparent: true,
-    frame: false,
-    alwaysOnTop: true,
-    resizable: false,
-    skipTaskbar: true,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-      worldSafeExecuteJavaScript: true, 
-      contextIsolation: true,
-      nodeIntegration: true,
-    },
-    
-  });
-
-  // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "../public/index.html"))
-  .then(_ => {
-    console.log("index.html loaded");
-  })
-  .catch( e => {
-    console.log(e);
-  });
-
-  ipcMain.on(event_fit_window, (_, data) => {
-    console.log(`fit-window, data: ${data.w} ${data.h}`)
-    mainWindow.setSize(data.w, data.h)
-  })
-
-  preventLeaveOntop(mainWindow)
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
-
-  return mainWindow;
-}
-
-
 function macOsRecreateWindow() {
   app.on('activate', function() {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    if (BrowserWindow.getAllWindows().length === 0) createMascotScreen()
   })
 }
 
@@ -78,6 +38,9 @@ function macOsRecreateWindow() {
 function createTray(window: BrowserWindow) {
   tray = new Tray(path.join(__dirname, "../icons/icon.png"))
   const menu = Menu.buildFromTemplate([
+    {
+      label: 'Import Gif', click: importGifClick
+    },
     {
       label: 'Hide', click: function() {
         window.hide()
@@ -117,4 +80,9 @@ function preventLeaveOntop(window: BrowserWindow) {
   //     window.show()
   //   }, 1);
   // });
+}
+
+function importGifClick() {
+  console.log('importGifClick');
+  
 }
