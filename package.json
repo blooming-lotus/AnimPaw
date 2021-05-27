@@ -1,0 +1,43 @@
+{
+  "name": "animpaw",
+  "version": "1.7.0",
+  "description": "meow woof!",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "eslint -c .eslintrc --ext .ts ./src",
+    "start": "tsc && electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "repository": "https://github.com/electron/electron-quick-start-typescript",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo",
+    "typescript"
+  ],
+  "author": "star191",
+  "license": "Apache License 2.0",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.57",
+    "@electron-forge/maker-wix": "^6.0.0-beta.57",
+    "@electron-forge/maker-deb": "^6.0.0-beta.57",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.57",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
+    "@electron-forge/maker-zip": "^6.0.0-beta.57",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "electron": "13.0.1",
+    "eslint": "^7.6.0",
+    "eslint-plugin-import": "^2.20.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {},
+  "config": {
+    "forge": "./forge.config.js"
+  }
+}
