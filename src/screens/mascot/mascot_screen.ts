@@ -24,7 +24,7 @@ export function createMascotScreen(): BrowserWindow {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "../../../public/mascot_screen/index.html"))
+  mainWindow.loadFile(path.join(__dirname, "../../../public/mascot_screen.html"))
     .then(_ => {
       console.log("index.html loaded");
     })
