@@ -1,8 +1,8 @@
-import { app, BrowserWindow, ipcMain, Menu, NativeImage, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, NativeImage, remote, Tray } from "electron";
 import * as path from "path";
 import { createImportScreen } from "./screens/import/import_screen";
 import { createMascotScreen } from "./screens/mascot/mascot_screen";
-import { event_fit_window } from "./vars";
+import { DEBUG } from "./vars";
 
 let tray: Tray|null = null;
 
@@ -14,6 +14,8 @@ app.whenReady().then(() =>{
   preventLeaveOntop(window);
   createTray(window);
   macOsRecreateWindow();
+
+  if (DEBUG) importGifClick()
 })
 
 
