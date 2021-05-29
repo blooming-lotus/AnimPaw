@@ -1,0 +1,328 @@
+diff --git a/node_modules/lowdb/.eslintrc.json b/node_modules/lowdb/.eslintrc.json
+new file mode 100644
+index 0000000..97b8262
+--- /dev/null
++++ b/node_modules/lowdb/.eslintrc.json
+@@ -0,0 +1,10 @@
++{
++  "extends": "@typicode",
++  "parserOptions": {
++    "project": ["./tsconfig.lint.json"]
++  },
++  "env":{
++    "browser": true,
++    "node": true
++  }
++}
+diff --git a/node_modules/lowdb/CONTRIBUTING.md b/node_modules/lowdb/CONTRIBUTING.md
+new file mode 100644
+index 0000000..c4b1f9f
+--- /dev/null
++++ b/node_modules/lowdb/CONTRIBUTING.md
+@@ -0,0 +1,2 @@
++By contributing, you agree to release your modifications under the MIT
++license (see the file LICENSE-MIT).
+diff --git a/node_modules/lowdb/README.md b/node_modules/lowdb/README.md
+index 2373128..468fb9e 100644
+--- a/node_modules/lowdb/README.md
++++ b/node_modules/lowdb/README.md
+@@ -279,13 +279,11 @@ To create an adapter for another format than JSON, you can use `TextFile` or `Te
+ For example:
+ 
+ ```js
+-import { Adapter, Low, TextFile } from 'Low.js'
++import { Adapter, Low, TextFile } from 'lowdb'
+ import YAML from 'yaml'
+ 
+-export class YAMLFile {
+-  private adapter
+-
+-  constructor(filename: string) {
++class YAMLFile {
++  constructor(filename) {
+     this.adapter = new TextFile(filename)
+   }
+ 
+diff --git a/node_modules/lowdb/lib/Low.js b/node_modules/lowdb/lib/Low.js
+index eca7f15..e80be60 100644
+--- a/node_modules/lowdb/lib/Low.js
++++ b/node_modules/lowdb/lib/Low.js
+@@ -1,12 +1,15 @@
+-import { MissingAdapterError } from './MissingAdapterError.js';
+-export class Low {
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.Low = void 0;
++const MissingAdapterError_js_1 = require("./MissingAdapterError.js");
++class Low {
+     constructor(adapter) {
+         this.data = null;
+         if (adapter) {
+             this.adapter = adapter;
+         }
+         else {
+-            throw new MissingAdapterError();
++            throw new MissingAdapterError_js_1.MissingAdapterError();
+         }
+     }
+     async read() {
+@@ -18,3 +21,4 @@ export class Low {
+         }
+     }
+ }
++exports.Low = Low;
+diff --git a/node_modules/lowdb/lib/LowSync.js b/node_modules/lowdb/lib/LowSync.js
+index c2b8428..ed338e4 100644
+--- a/node_modules/lowdb/lib/LowSync.js
++++ b/node_modules/lowdb/lib/LowSync.js
+@@ -1,12 +1,15 @@
+-import { MissingAdapterError } from './MissingAdapterError.js';
+-export class LowSync {
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.LowSync = void 0;
++const MissingAdapterError_js_1 = require("./MissingAdapterError.js");
++class LowSync {
+     constructor(adapter) {
+         this.data = null;
+         if (adapter) {
+             this.adapter = adapter;
+         }
+         else {
+-            throw new MissingAdapterError();
++            throw new MissingAdapterError_js_1.MissingAdapterError();
+         }
+     }
+     read() {
+@@ -18,3 +21,4 @@ export class LowSync {
+         }
+     }
+ }
++exports.LowSync = LowSync;
+diff --git a/node_modules/lowdb/lib/MissingAdapterError.js b/node_modules/lowdb/lib/MissingAdapterError.js
+index 9cb4c95..4383224 100644
+--- a/node_modules/lowdb/lib/MissingAdapterError.js
++++ b/node_modules/lowdb/lib/MissingAdapterError.js
+@@ -1,6 +1,10 @@
+-export class MissingAdapterError extends Error {
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.MissingAdapterError = void 0;
++class MissingAdapterError extends Error {
+     constructor() {
+         super();
+         this.message = 'Missing Adapter';
+     }
+ }
++exports.MissingAdapterError = MissingAdapterError;
+diff --git a/node_modules/lowdb/lib/adapters/JSONFile.js b/node_modules/lowdb/lib/adapters/JSONFile.js
+index 63d6542..33b392b 100644
+--- a/node_modules/lowdb/lib/adapters/JSONFile.js
++++ b/node_modules/lowdb/lib/adapters/JSONFile.js
+@@ -1,7 +1,10 @@
+-import { TextFile } from './TextFile.js';
+-export class JSONFile {
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.JSONFile = void 0;
++const TextFile_js_1 = require("./TextFile.js");
++class JSONFile {
+     constructor(filename) {
+-        this.adapter = new TextFile(filename);
++        this.adapter = new TextFile_js_1.TextFile(filename);
+     }
+     async read() {
+         const data = await this.adapter.read();
+@@ -16,3 +19,4 @@ export class JSONFile {
+         return this.adapter.write(JSON.stringify(obj, null, 2));
+     }
+ }
++exports.JSONFile = JSONFile;
+diff --git a/node_modules/lowdb/lib/adapters/JSONFileSync.js b/node_modules/lowdb/lib/adapters/JSONFileSync.js
+index 8a8a6bf..43666b9 100644
+--- a/node_modules/lowdb/lib/adapters/JSONFileSync.js
++++ b/node_modules/lowdb/lib/adapters/JSONFileSync.js
+@@ -1,7 +1,10 @@
+-import { TextFileSync } from './TextFileSync.js';
+-export class JSONFileSync {
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.JSONFileSync = void 0;
++const TextFileSync_js_1 = require("./TextFileSync.js");
++class JSONFileSync {
+     constructor(filename) {
+-        this.adapter = new TextFileSync(filename);
++        this.adapter = new TextFileSync_js_1.TextFileSync(filename);
+     }
+     read() {
+         const data = this.adapter.read();
+@@ -16,3 +19,4 @@ export class JSONFileSync {
+         this.adapter.write(JSON.stringify(obj, null, 2));
+     }
+ }
++exports.JSONFileSync = JSONFileSync;
+diff --git a/node_modules/lowdb/lib/adapters/LocalStorage.js b/node_modules/lowdb/lib/adapters/LocalStorage.js
+index 6c6689b..02a62ea 100644
+--- a/node_modules/lowdb/lib/adapters/LocalStorage.js
++++ b/node_modules/lowdb/lib/adapters/LocalStorage.js
+@@ -1,4 +1,7 @@
+-export class LocalStorage {
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.LocalStorage = void 0;
++class LocalStorage {
+     constructor(key) {
+         this.key = key;
+     }
+@@ -13,3 +16,4 @@ export class LocalStorage {
+         localStorage.setItem(this.key, JSON.stringify(obj));
+     }
+ }
++exports.LocalStorage = LocalStorage;
+diff --git a/node_modules/lowdb/lib/adapters/Memory.js b/node_modules/lowdb/lib/adapters/Memory.js
+index 6cd4f19..e59e0ca 100644
+--- a/node_modules/lowdb/lib/adapters/Memory.js
++++ b/node_modules/lowdb/lib/adapters/Memory.js
+@@ -1,4 +1,7 @@
+-export class Memory {
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.Memory = void 0;
++class Memory {
+     constructor() {
+         this.data = null;
+     }
+@@ -10,3 +13,4 @@ export class Memory {
+         return Promise.resolve();
+     }
+ }
++exports.Memory = Memory;
+diff --git a/node_modules/lowdb/lib/adapters/MemorySync.js b/node_modules/lowdb/lib/adapters/MemorySync.js
+index e9f72e6..3606097 100644
+--- a/node_modules/lowdb/lib/adapters/MemorySync.js
++++ b/node_modules/lowdb/lib/adapters/MemorySync.js
+@@ -1,4 +1,7 @@
+-export class MemorySync {
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.MemorySync = void 0;
++class MemorySync {
+     constructor() {
+         this.data = null;
+     }
+@@ -9,3 +12,4 @@ export class MemorySync {
+         this.data = obj;
+     }
+ }
++exports.MemorySync = MemorySync;
+diff --git a/node_modules/lowdb/lib/adapters/TextFile.js b/node_modules/lowdb/lib/adapters/TextFile.js
+index 0dc3f41..9d71009 100644
+--- a/node_modules/lowdb/lib/adapters/TextFile.js
++++ b/node_modules/lowdb/lib/adapters/TextFile.js
+@@ -1,14 +1,20 @@
+-import fs from 'fs';
+-import { Writer } from 'steno';
+-export class TextFile {
++"use strict";
++var __importDefault = (this && this.__importDefault) || function (mod) {
++    return (mod && mod.__esModule) ? mod : { "default": mod };
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.TextFile = void 0;
++const fs_1 = __importDefault(require("fs"));
++const steno_1 = require("steno");
++class TextFile {
+     constructor(filename) {
+         this.filename = filename;
+-        this.writer = new Writer(filename);
++        this.writer = new steno_1.Writer(filename);
+     }
+     async read() {
+         let data;
+         try {
+-            data = await fs.promises.readFile(this.filename, 'utf-8');
++            data = await fs_1.default.promises.readFile(this.filename, 'utf-8');
+         }
+         catch (e) {
+             if (e.code === 'ENOENT') {
+@@ -22,3 +28,4 @@ export class TextFile {
+         return this.writer.write(str);
+     }
+ }
++exports.TextFile = TextFile;
+diff --git a/node_modules/lowdb/lib/adapters/TextFileSync.js b/node_modules/lowdb/lib/adapters/TextFileSync.js
+index fe27e17..b6c4016 100644
+--- a/node_modules/lowdb/lib/adapters/TextFileSync.js
++++ b/node_modules/lowdb/lib/adapters/TextFileSync.js
+@@ -1,14 +1,20 @@
+-import fs from 'fs';
+-import path from 'path';
+-export class TextFileSync {
++"use strict";
++var __importDefault = (this && this.__importDefault) || function (mod) {
++    return (mod && mod.__esModule) ? mod : { "default": mod };
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++exports.TextFileSync = void 0;
++const fs_1 = __importDefault(require("fs"));
++const path_1 = __importDefault(require("path"));
++class TextFileSync {
+     constructor(filename) {
+         this.filename = filename;
+-        this.tempFilename = path.join(path.dirname(filename), `.${path.basename(filename)}.tmp`);
++        this.tempFilename = path_1.default.join(path_1.default.dirname(filename), `.${path_1.default.basename(filename)}.tmp`);
+     }
+     read() {
+         let data;
+         try {
+-            data = fs.readFileSync(this.filename, 'utf-8');
++            data = fs_1.default.readFileSync(this.filename, 'utf-8');
+         }
+         catch (e) {
+             if (e.code === 'ENOENT') {
+@@ -19,7 +25,8 @@ export class TextFileSync {
+         return data;
+     }
+     write(str) {
+-        fs.writeFileSync(this.tempFilename, str);
+-        fs.renameSync(this.tempFilename, this.filename);
++        fs_1.default.writeFileSync(this.tempFilename, str);
++        fs_1.default.renameSync(this.tempFilename, this.filename);
+     }
+ }
++exports.TextFileSync = TextFileSync;
+diff --git a/node_modules/lowdb/lib/index.js b/node_modules/lowdb/lib/index.js
+index 6759b76..2e5c219 100644
+--- a/node_modules/lowdb/lib/index.js
++++ b/node_modules/lowdb/lib/index.js
+@@ -1,9 +1,21 @@
+-export * from './adapters/JSONFile.js';
+-export * from './adapters/JSONFileSync.js';
+-export * from './adapters/LocalStorage.js';
+-export * from './adapters/Memory.js';
+-export * from './adapters/MemorySync.js';
+-export * from './adapters/TextFile.js';
+-export * from './adapters/TextFileSync.js';
+-export * from './Low.js';
+-export * from './LowSync.js';
++"use strict";
++var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
++    if (k2 === undefined) k2 = k;
++    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
++}) : (function(o, m, k, k2) {
++    if (k2 === undefined) k2 = k;
++    o[k2] = m[k];
++}));
++var __exportStar = (this && this.__exportStar) || function(m, exports) {
++    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
++};
++Object.defineProperty(exports, "__esModule", { value: true });
++__exportStar(require("./adapters/JSONFile.js"), exports);
++__exportStar(require("./adapters/JSONFileSync.js"), exports);
++__exportStar(require("./adapters/LocalStorage.js"), exports);
++__exportStar(require("./adapters/Memory.js"), exports);
++__exportStar(require("./adapters/MemorySync.js"), exports);
++__exportStar(require("./adapters/TextFile.js"), exports);
++__exportStar(require("./adapters/TextFileSync.js"), exports);
++__exportStar(require("./Low.js"), exports);
++__exportStar(require("./LowSync.js"), exports);
