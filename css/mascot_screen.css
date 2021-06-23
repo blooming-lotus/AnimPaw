@@ -2,6 +2,7 @@
 * {
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 body {
@@ -10,17 +11,24 @@ body {
     /* background-color: red; */
 }
 
+#character {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100%;
+    max-width: 100%;
+    min-width: fit-content;
+    min-height: fit-content;
+}
+
 .container {
     left: 0;
     top: 0;
     overflow: hidden;
+    display: inline-block;
     /* background-color: green; */
 }
 
 .draggable {
     -webkit-app-region: drag;
-}
-
-* {
-    overflow: hidden;
 }
