@@ -12,7 +12,7 @@ export function createMascotScreen(): BrowserWindow {
     icon: path.join(__dirname, "../../../icons/icon.png"),
     width: width,
     height: DEBUG && 600 || 0,
-    transparent: true,
+    transparent: !DEBUG,
     frame: DEBUG,
     alwaysOnTop: true,
     resizable: DEBUG,
